@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif-ui: Georgia, "Times New Roman", "Noto Serif", serif;
+  --font-mono-ui: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --color-ink: #05070a;
+  --color-bone: #e8e2d4;
+  --color-ember: #ffb347;
+  --color-blood: #b3202a;
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-serif-ui);
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+@keyframes glitch {
+  0%, 92%, 100% { transform: translate(0); text-shadow: 0 0 0 transparent; }
+  93% { transform: translate(-3px, 1px); text-shadow: 3px 0 #ff2a3a, -3px 0 #2ae0ff; }
+  95% { transform: translate(4px, -1px); text-shadow: -4px 0 #ff2a3a, 4px 0 #2ae0ff; }
+  97% { transform: translate(-1px, 2px); text-shadow: 2px 0 #ff2a3a, -2px 0 #2ae0ff; }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes chapter { 0% { opacity: 0; letter-spacing: 0.1em; } 20%, 70% { opacity: 1; } 100% { opacity: 0; letter-spacing: 0.5em; } }
+@keyframes blackout { 0% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes flashout { 0% { opacity: 0.95; } 100% { opacity: 0; } }
+@keyframes breathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+
+.anim-glitch { animation: glitch 5s infinite steps(1); }
+.anim-fade { animation: fadeIn 0.6s ease-out both; }
+.anim-chapter { animation: chapter 2.8s ease-in-out both; }
+.anim-blackout { animation: blackout 2s ease-out both; }
+.anim-flash { animation: flashout 0.45s ease-out both; }
+.anim-breathe { animation: breathe 2.4s ease-in-out infinite; }
+
+.panel-scroll { scrollbar-width: thin; scrollbar-color: #3a3f48 transparent; }
+.safe-b { padding-bottom: max(0.75rem, env(safe-area-inset-bottom)); }
+.safe-t { padding-top: max(0.75rem, env(safe-area-inset-top)); }
+.safe-x { padding-left: max(0.75rem, env(safe-area-inset-left)); padding-right: max(0.75rem, env(safe-area-inset-right)); }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-glitch, .anim-breathe { animation: none; }
+}
